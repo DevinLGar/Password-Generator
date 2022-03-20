@@ -3,8 +3,9 @@ var confirmUpper;
 var confirmLower;
 var confirmNum;
 var confirmSpec;
+var criteria;
 
-specChar = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "\:", "\;", " < ", "=", " > ", " ? ", "@", "[", "\\", "]", " ^ ", "_", "`", "{", "|", "}", "~"]
+specChar = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "\:", "\;", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"]
 
 num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
@@ -33,7 +34,21 @@ function generatePassword() {
   if (!confirmUpper && !confirmLower && !confirmNum && !confirmSpec) {
     window.alert("You must choose atleast one criteria.")
   }
+  // all criterias
+  else if (confirmUpper && confirmLower && confirmNum && confirmSpec) {
+    criteria = specChar.concat(num, letterLow, letterUp);
+  }
 
+  // array placeholder for passLength input
+  var password = [];
+  // random selection
+  for (var i = 0; i < passLength; i++) {
+    var pickCrit = criteria[Math.floor(Math.random() * criteria.length)];
+    password.push(pickCrit);
+  }
+
+  var ps = password.join("");
+  return ps;
 }
 
 // Get references to the #generate element
@@ -52,7 +67,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-// Password criteria prompts
-// *length criteria (8, 128)
-// *lowercase, uppercase, etc
