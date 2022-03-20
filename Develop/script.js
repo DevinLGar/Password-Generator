@@ -36,7 +36,55 @@ function generatePassword() {
   }
   // all criterias
   else if (confirmUpper && confirmLower && confirmNum && confirmSpec) {
-    criteria = specChar.concat(num, letterLow, letterUp);
+    criteria = letterUp.concat(letterLow, num, specChar);
+  }
+
+  // 3 criterias
+  else if (confirmSpec && confirmNum && confirmUpper) {
+    criteria = specChar.concat(num, letterUp);
+  }
+  else if (confirmSpec && confirmNum && confirmLower) {
+    criteria = specChar.concat(num, letterLow);
+  }
+  else if (confirmSpec && confirmLower && confirmUpper) {
+    criteria = specChar.concat(letterLow, letterUp);
+  }
+  else if (confirmNum && confirmLower && confirmUpper) {
+    criteria = num.concat(letterLow, letterUp);
+  }
+
+  // 2 criterias
+  else if (confirmSpec && confirmNum) {
+    criteria = specChar.concat(num);
+  }
+  else if (confirmSpec && confirmLower) {
+    criteria = specChar.concat(letterLow);
+  }
+  else if (confirmSpec && confirmUpper) {
+    criteria = specChar.concat(letterUp);
+  }
+  else if (confirmNum && confirmLower) {
+    criteria = num.concat(letterLow);
+  }
+  else if (confirmNum && confirmUpper) {
+    criteria = num.concat(letterUp);
+  }
+  else if (confirmLower && confirmUpper) {
+    criteria = letterLow.concat(letterUp);
+  }
+
+  // 1 criteria
+  else if (confirmUpper) {
+    criteria = letterUp;
+  }
+  else if (confirmLower) {
+    criteria = letterLow;
+  }
+  else if (confirmNum) {
+    criteria = num;
+  }
+  else if (confirmSpec) {
+    criteria = specChar;
   }
 
   // array placeholder for passLength input
@@ -47,8 +95,8 @@ function generatePassword() {
     password.push(pickCrit);
   }
 
-  var ps = password.join("");
-  return ps;
+  var pw = password.join("");
+  return pw;
 }
 
 // Get references to the #generate element
